@@ -1,4 +1,4 @@
-Function FileOutput(ByVal filepathName As String) As Integer
+Function FileOutput(ByVal filepathName As String, ByVal firstCol As Integer, ByVal firstRow As Integer) As Integer
     Dim ws As Worksheet
     Set ws = ThisWorkbook.Worksheets(1)
     Dim datFile As String
@@ -16,9 +16,9 @@ Function FileOutput(ByVal filepathName As String) As Integer
         .Charset = "UTF-8"
         .Open
         
-        i = 1
-        Do While ws.Cells(i, 6).Value <> ""
-            .WriteText ws.Cells(i, 6).Value & vbLf
+        i = firstCol
+        Do While ws.Cells(i, firstRow).Value <> ""
+            .WriteText ws.Cells(i, firstRow).Value & vbLf
             i = i + 1
         Loop
         .SaveToFile (filepathName)
@@ -27,4 +27,3 @@ Function FileOutput(ByVal filepathName As String) As Integer
     MsgBox filepathName + "に書き出しました"
     FileOutput = 0
 End Function
-
